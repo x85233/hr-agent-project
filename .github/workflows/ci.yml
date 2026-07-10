@@ -10,10 +10,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: hr-agent-project
-
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -50,5 +46,5 @@ jobs:
         with:
           name: evaluation-results
           path: |
-            hr-agent-project/evaluation/results.md
-            hr-agent-project/evaluation/eval_results.json
+            evaluation/results.md
+            evaluation/eval_results.json
