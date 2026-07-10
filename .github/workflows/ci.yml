@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: hr-agent-project
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: App import check
+        run: |
+          python -c "from app.main import app; print('App import ok')"
+
+      - name: MCP client check
+        run: |
+          python -c "from app.mcp_client import available_tools; print(available_tools())"
+
+      - name: Run tests
+        run: |
+          pytest
+
+      - name: Run evaluation
+        run: |
+          python evaluation/run_eval.py
+
+      - name: Upload evaluation outputs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evaluation-results
+          path: |
+            hr-agent-project/evaluation/results.md
+            hr-agent-project/evaluation/eval_results.json
