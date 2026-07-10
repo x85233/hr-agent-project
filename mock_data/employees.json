@@ -1,0 +1,74 @@
+[
+  {
+    "employee_id": "E1001",
+    "name": "Jordan Lee",
+    "employment_type": "full-time",
+    "role": "Software Engineer",
+    "department": "Engineering",
+    "office": "Virginia",
+    "work_arrangement": "hybrid eligible",
+    "manager_id": "E2001",
+    "pto_eligible": true,
+    "benefits_eligibility": "full"
+  },
+  {
+    "employee_id": "E1002",
+    "name": "Maya Patel",
+    "employment_type": "part-time",
+    "role": "Operations Associate",
+    "department": "Operations",
+    "office": "Maryland",
+    "work_arrangement": "office first",
+    "manager_id": "E2001",
+    "pto_eligible": true,
+    "benefits_eligibility": "limited"
+  },
+  {
+    "employee_id": "E1003",
+    "name": "Chris Morgan",
+    "employment_type": "full-time",
+    "role": "Sales Manager",
+    "department": "Sales",
+    "office": "California",
+    "work_arrangement": "hybrid eligible",
+    "manager_id": "E2002",
+    "pto_eligible": true,
+    "benefits_eligibility": "full"
+  },
+  {
+    "employee_id": "E1004",
+    "name": "Taylor Brooks",
+    "employment_type": "contractor",
+    "role": "Implementation Specialist",
+    "department": "Customer Success",
+    "office": "Texas",
+    "work_arrangement": "contract based",
+    "manager_id": "E2002",
+    "pto_eligible": false,
+    "benefits_eligibility": "not eligible"
+  },
+  {
+    "employee_id": "E2001",
+    "name": "Alex Rivera",
+    "employment_type": "full-time",
+    "role": "HR Manager",
+    "department": "People",
+    "office": "Virginia",
+    "work_arrangement": "hybrid eligible",
+    "manager_id": null,
+    "pto_eligible": true,
+    "benefits_eligibility": "full"
+  },
+  {
+    "employee_id": "E2002",
+    "name": "Sam Chen",
+    "employment_type": "full-time",
+    "role": "Director",
+    "department": "Sales",
+    "office": "California",
+    "work_arrangement": "hybrid eligible",
+    "manager_id": null,
+    "pto_eligible": true,
+    "benefits_eligibility": "full"
+  }
+]

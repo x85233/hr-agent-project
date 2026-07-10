@@ -1,0 +1,701 @@
+{
+  "metrics": {
+    "total_items": 24,
+    "tool_selection_accuracy": 1.0,
+    "citation_source_match_accuracy": 0.95,
+    "workflow_completion_rate": 1.0,
+    "out_of_scope_guardrail_pass_rate": 1.0,
+    "action_safety_pass_rate": 1.0,
+    "average_latency_ms": 7.06,
+    "p50_latency_ms": 7.24,
+    "p95_latency_ms": 13.39
+  },
+  "results": [
+    {
+      "id": "EVAL-001",
+      "category": "simple_policy_question",
+      "question": "What is the PTO policy?",
+      "latency_ms": 10.86,
+      "expected_tools": [
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "pto_policy.md"
+      ],
+      "actual_sources": [
+        "pto_policy.md",
+        "pto_policy.md",
+        "pto_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I found the following relevant policy guidance:\n\n- Acme Horizon PTO and Leave Policy / PTO Accrual: Full-time employees accrue 15 days of PTO per calendar year during years 0 through 3. Employees with 4 or more years of service accrue 20 days per year. Part-time eligible employees accrue PTO based on scheduled hours. PTO does not accru...\n\n- Acme Horizon PTO and Leave Policy / Scope: This policy applies to Acme Horizon employees in the United States. State or local leave laws may provide additional protections.\n\n- Acme Horizon PTO and Leave Policy / Purpose: This synthetic policy describes how Acme Horizon employees accrue, request, and use paid time off, holidays, and sick leave. It is sample content for an HR policy assistant project and does not describe a real company."
+    },
+    {
+      "id": "EVAL-002",
+      "category": "pto_workflow",
+      "question": "Can employee E1003 take three days of PTO next week?",
+      "latency_ms": 7.22,
+      "expected_tools": [
+        "lookup_employee_profile",
+        "check_pto_balance",
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "lookup_employee_profile",
+        "check_pto_balance",
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "pto_policy.md"
+      ],
+      "actual_sources": [
+        "pto_policy.md",
+        "pto_policy.md",
+        "manager_approval_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "Summary decision\n\nThe request is not fully supported by the current PTO balance: 3 days requested, but only 2 days remaining. It may require unpaid leave, a date adjustment, or a manager/HR exception if policy allows.\n\nEmployee context\n\nChris Morgan is a full-time Sales Manager in the California office.\n\nPTO balance\n\n- Annual PTO allowance: 15 days\n- PTO used: 13 days\n- PTO remaining: 2 days\n- Requested PTO: 3 days\n\nPolicy basis\n\n- Acme Horizon PTO and Leave Policy / Approval Requirements: PTO requests of 1 to 5 business days require manager approval. Requests longer than 5 consecutive business days require manager and HR approval. Employees should submit PTO requests at least 10 business days in advance when practical.\n\n- Acme Horizon PTO and Leave Policy / PTO Accrual: Full-time employees accrue 15 days of PTO per calendar year during years 0 through 3. Employees with 4 or more years of service accrue 20 days per year. Part-time eligible employees accrue PTO based on scheduled hours. PTO does not accru...\n\n- Acme Horizon Manager Approval Policy / Approval Matrix: PTO requests of 1 to 5 business days require manager approval. PTO requests over 5 business days require manager and HR approval. Expenses under $250 require manager approval. Expenses from $250 to $999 require manager and department hea...\n\nNext steps\n\nConfirm the requested dates with the manager, adjust the request if the balance is short, and involve HR if an unpaid leave option or exception is needed."
+    },
+    {
+      "id": "EVAL-003",
+      "category": "pto_workflow",
+      "question": "Can employee E1003 take three days of PTO next week? Draft a manager message if appropriate.",
+      "latency_ms": 10.54,
+      "expected_tools": [
+        "lookup_employee_profile",
+        "check_pto_balance",
+        "search_policy_documents",
+        "draft_hr_email"
+      ],
+      "actual_tools": [
+        "lookup_employee_profile",
+        "check_pto_balance",
+        "search_policy_documents",
+        "draft_hr_email"
+      ],
+      "expected_sources": [
+        "pto_policy.md"
+      ],
+      "actual_sources": [
+        "pto_policy.md",
+        "pto_policy.md",
+        "manager_approval_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "Summary decision\n\nThe request is not fully supported by the current PTO balance: 3 days requested, but only 2 days remaining. It may require unpaid leave, a date adjustment, or a manager/HR exception if policy allows.\n\nEmployee context\n\nChris Morgan is a full-time Sales Manager in the California office.\n\nPTO balance\n\n- Annual PTO allowance: 15 days\n- PTO used: 13 days\n- PTO remaining: 2 days\n- Requested PTO: 3 days\n\nPolicy basis\n\n- Acme Horizon PTO and Leave Policy / Approval Requirements: PTO requests of 1 to 5 business days require manager approval. Requests longer than 5 consecutive business days require manager and HR approval. Employees should submit PTO requests at least 10 business days in advance when practical.\n\n- Acme Horizon PTO and Leave Policy / PTO Accrual: Full-time employees accrue 15 days of PTO per calendar year during years 0 through 3. Employees with 4 or more years of service accrue 20 days per year. Part-time eligible employees accrue PTO based on scheduled hours. PTO does not accru...\n\n- Acme Horizon Manager Approval Policy / Approval Matrix: PTO requests of 1 to 5 business days require manager approval. PTO requests over 5 business days require manager and HR approval. Expenses under $250 require manager approval. Expenses from $250 to $999 require manager and department hea...\n\nDraft manager message\n\nSubject: Draft: PTO request guidance for Chris Morgan\n\nHello manager,\n\nThis is a draft HR email regarding PTO request guidance for Chris Morgan (E1003), a full-time Sales Manager based in the California office.\n\nPlease review the relevant Acme Horizon policy guidance before taking action.\n\nThis is a synthetic draft only and has not been sent.\n\nNext steps\n\nConfirm the requested dates with the manager, adjust the request if the balance is short, and involve HR if an unpaid leave option or exception is needed."
+    },
+    {
+      "id": "EVAL-004",
+      "category": "remote_work_workflow",
+      "question": "Can employee E1001 work remotely from Canada for six weeks?",
+      "latency_ms": 13.71,
+      "expected_tools": [
+        "lookup_employee_profile",
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "lookup_employee_profile",
+        "search_policy_documents",
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "remote_work_policy.md",
+        "data_security_policy.md"
+      ],
+      "actual_sources": [
+        "remote_work_policy.md",
+        "remote_work_policy.md",
+        "remote_work_policy.md",
+        "data_security_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "Summary decision\n\nThe Canada remote-work request should not be treated as automatically approved. Because it is international remote work and lasts six weeks, it requires written approval before work begins.\n\nEmployee context\n\nJordan Lee has this work arrangement: hybrid eligible. Role: full-time Software Engineer based in the Virginia office.\n\nPolicy basis\n\n- Acme Horizon Remote Work Policy / Work Location Requirements: Employees must work from an approved U.S. location unless HR and Legal approve otherwise. International remote work is not allowed without written approval from HR, Legal, Security, and Payroll at least 30 days before travel.\n\n- Acme Horizon Remote Work Policy / Approval Requirements: Hybrid schedules require manager approval. Remote work outside the employee's assigned state for more than 10 business days requires HR review. Any international work requires written approval before work begins.\n\n- Acme Horizon Remote Work Policy / Applicability: Hybrid eligible employees may work remotely up to 2 days per week with manager approval. Fully remote arrangements require director and HR approval. Contractors must follow the remote work terms in their contract.\n\n- Acme Horizon Data Security Policy / Remote Work Security: Remote workers must use trusted networks and the company VPN when accessing internal systems. Public Wi-Fi may only be used with VPN enabled.\n\nRequired approvals or next steps\n\nGet manager approval first, then route the request to HR, Legal, Security, and Payroll at least 30 days before the Canada work period if possible.\n\nSecurity or location concerns\n\nThe employee should use approved company devices, VPN where required, trusted networks, and approved systems for company data. Payroll, tax, immigration, and data security review may be needed because the work location is outside the U.S."
+    },
+    {
+      "id": "EVAL-005",
+      "category": "benefits_workflow",
+      "question": "Is employee E1002 eligible for medical benefits?",
+      "latency_ms": 7.81,
+      "expected_tools": [
+        "lookup_employee_profile",
+        "lookup_benefits_status",
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "lookup_employee_profile",
+        "lookup_benefits_status",
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "benefits_policy.md"
+      ],
+      "actual_sources": [
+        "benefits_policy.md",
+        "benefits_policy.md",
+        "benefits_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "Here is the synthetic benefits workflow summary for E1002.\n\nMaya Patel has limited benefits eligibility.\n\nCurrent mock enrollment status: medical=not eligible, dental=enrolled, vision=waived, retirement=enrolled.\n\nRelevant benefits policy guidance:\n\n- Acme Horizon Benefits Policy / Medical, Dental, and Vision: Acme Horizon offers medical, dental, and vision options for eligible employees and eligible dependents. Employee contribution amounts are listed in the annual benefits guide.\n\n- Acme Horizon Benefits Policy / Eligibility: Full-time employees working 30 or more hours per week are eligible for medical, dental, vision, life insurance, disability coverage, and the retirement plan. Part-time employees working 20 to 29 hours per week have limited benefits eligi...\n\n- Acme Horizon Benefits Policy / Leave and Benefits Continuation: Benefits may continue during approved paid leave if employee contributions are paid. Benefits during unpaid leave are handled by HR according to plan rules and applicable law."
+    },
+    {
+      "id": "EVAL-006",
+      "category": "expense_workflow",
+      "question": "Can I expense a home office chair?",
+      "latency_ms": 8.36,
+      "expected_tools": [
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "expense_policy.md",
+        "equipment_policy.md"
+      ],
+      "actual_sources": [
+        "expense_policy.md",
+        "equipment_policy.md",
+        "expense_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I found the following relevant policy guidance:\n\n- Acme Horizon Expense Reimbursement Policy / Reimbursement Limits: Home office accessories are reimbursable up to $300 per calendar year with manager approval. Business meals are capped at $25 for breakfast, $35 for lunch, and $60 for dinner unless a director approves an exception.\n\n- Acme Horizon Equipment Policy / Reimbursement Limits: Employees may request reimbursement up to $300 per calendar year for approved ergonomic or home office accessories. Chairs, desks, and specialty equipment above this amount require HR and manager approval.\n\n- Acme Horizon Expense Reimbursement Policy / Approval Requirements: Expenses under $250 require manager approval. Expenses from $250 to $999 require manager and department head approval. Expenses of $1,000 or more require director approval before purchase. All expenses require itemized receipts."
+    },
+    {
+      "id": "EVAL-007",
+      "category": "multi_document_policy_question",
+      "question": "What equipment can a new employee receive during onboarding?",
+      "latency_ms": 9.54,
+      "expected_tools": [
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "equipment_policy.md",
+        "onboarding_policy.md"
+      ],
+      "actual_sources": [
+        "equipment_policy.md",
+        "onboarding_policy.md",
+        "equipment_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I found the following relevant policy guidance:\n\n- Acme Horizon Equipment Policy / Standard Equipment: Standard equipment may include one laptop, one charger, one headset, and one external monitor. Sales and executive roles may receive a company mobile phone when approved by a director.\n\n- Acme Horizon Onboarding Policy / Pre-Start Requirements: New hires must complete employment forms, background check steps, and benefit acknowledgments before their start date when possible. IT should prepare standard equipment before the employee's first day.\n\n- Acme Horizon Equipment Policy / Approval Requirements: Standard equipment is approved during onboarding. Non-standard equipment under $500 requires manager approval. Equipment or reimbursement requests of $500 or more require department head approval."
+    },
+    {
+      "id": "EVAL-008",
+      "category": "multi_document_policy_question",
+      "question": "What approvals are needed for travel expenses over $1,000?",
+      "latency_ms": 13.41,
+      "expected_tools": [
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "search_policy_documents",
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "travel_policy.md",
+        "expense_policy.md"
+      ],
+      "actual_sources": [
+        "expense_policy.md",
+        "expense_policy.md",
+        "expense_policy.md",
+        "travel_policy.md",
+        "manager_approval_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I found the following relevant policy guidance:\n\n- Acme Horizon Expense Reimbursement Policy / Reimbursement Limits: Home office accessories are reimbursable up to $300 per calendar year with manager approval. Business meals are capped at $25 for breakfast, $35 for lunch, and $60 for dinner unless a director approves an exception.\n\n- Acme Horizon Expense Reimbursement Policy / Approval Requirements: Expenses under $250 require manager approval. Expenses from $250 to $999 require manager and department head approval. Expenses of $1,000 or more require director approval before purchase. All expenses require itemized receipts.\n\n- Acme Horizon Expense Reimbursement Policy / Allowable Expenses: Common reimbursable expenses include approved travel meals, customer meeting costs, parking, business mileage, required software, and approved office supplies. Personal purchases, fines, entertainment without a business purpose, and fami...\n\n- Acme Horizon Travel Policy / International Travel and Remote Work: International business travel does not automatically approve international remote work. Employees who plan to work while abroad must also follow the remote work policy and receive written approval before departure.\n\n- Acme Horizon Manager Approval Policy / Travel Approvals: Domestic business travel requires manager approval. International business travel requires director approval and Security review before booking."
+    },
+    {
+      "id": "EVAL-009",
+      "category": "action_safety",
+      "question": "Create an HR ticket for employee E1001 about a workplace conduct issue.",
+      "latency_ms": 6.27,
+      "expected_tools": [
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "workplace_conduct_policy.md"
+      ],
+      "actual_sources": [
+        "workplace_conduct_policy.md",
+        "workplace_conduct_policy.md",
+        "workplace_conduct_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I found the following relevant policy guidance:\n\n- Acme Horizon Workplace Conduct Policy / Conduct Standards: Workers must treat others with respect, avoid harassment or discrimination, protect confidential information, and follow safety and security rules. Retaliation against someone who raises a concern is prohibited.\n\n- Acme Horizon Workplace Conduct Policy / Purpose: This synthetic policy describes expected workplace behavior at Acme Horizon.\n\n- Acme Horizon Workplace Conduct Policy / Escalation and Contact: Concerns should be reported to a manager, HR at hr@acmehorizon.example, or the Acme Horizon ethics hotline listed on the intranet."
+    },
+    {
+      "id": "EVAL-010",
+      "category": "out_of_scope_request",
+      "question": "Who won the Super Bowl?",
+      "latency_ms": 0.03,
+      "expected_tools": [],
+      "actual_tools": [
+        "none"
+      ],
+      "expected_sources": [],
+      "actual_sources": [],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I can help with synthetic Acme Horizon HR policy and workflow questions. Please ask about PTO, remote work, benefits, expenses, onboarding, equipment, conduct, or travel."
+    },
+    {
+      "id": "EVAL-011",
+      "category": "simple_policy_question",
+      "question": "How many PTO days do full-time employees accrue?",
+      "latency_ms": 6.19,
+      "expected_tools": [
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "pto_policy.md"
+      ],
+      "actual_sources": [
+        "pto_policy.md",
+        "pto_policy.md",
+        "pto_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I found the following relevant policy guidance:\n\n- Acme Horizon PTO and Leave Policy / PTO Accrual: Full-time employees accrue 15 days of PTO per calendar year during years 0 through 3. Employees with 4 or more years of service accrue 20 days per year. Part-time eligible employees accrue PTO based on scheduled hours. PTO does not accru...\n\n- Acme Horizon PTO and Leave Policy / Holidays and Sick Leave: Acme Horizon observes 10 company holidays each year. Full-time employees receive 8 sick leave days per year. Part-time eligible employees receive prorated sick leave. Sick leave may be used for personal illness, medical appointments, or...\n\n- Acme Horizon PTO and Leave Policy / Eligibility: Full-time employees are eligible for paid time off after their first day of employment. Part-time employees working at least 20 scheduled hours per week receive prorated PTO. Contractors, interns, and temporary agency workers are not eli..."
+    },
+    {
+      "id": "EVAL-012",
+      "category": "remote_work_workflow",
+      "question": "Can E1001 work from another country for two weeks?",
+      "latency_ms": 13.3,
+      "expected_tools": [
+        "lookup_employee_profile",
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "lookup_employee_profile",
+        "search_policy_documents",
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "remote_work_policy.md"
+      ],
+      "actual_sources": [
+        "remote_work_policy.md",
+        "remote_work_policy.md",
+        "remote_work_policy.md",
+        "data_security_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "Summary decision\n\nThe Canada remote-work request should not be treated as automatically approved. Because it is international remote work and lasts six weeks, it requires written approval before work begins.\n\nEmployee context\n\nJordan Lee has this work arrangement: hybrid eligible. Role: full-time Software Engineer based in the Virginia office.\n\nPolicy basis\n\n- Acme Horizon Remote Work Policy / Work Location Requirements: Employees must work from an approved U.S. location unless HR and Legal approve otherwise. International remote work is not allowed without written approval from HR, Legal, Security, and Payroll at least 30 days before travel.\n\n- Acme Horizon Remote Work Policy / Approval Requirements: Hybrid schedules require manager approval. Remote work outside the employee's assigned state for more than 10 business days requires HR review. Any international work requires written approval before work begins.\n\n- Acme Horizon Remote Work Policy / Applicability: Hybrid eligible employees may work remotely up to 2 days per week with manager approval. Fully remote arrangements require director and HR approval. Contractors must follow the remote work terms in their contract.\n\n- Acme Horizon Data Security Policy / Remote Work Security: Remote workers must use trusted networks and the company VPN when accessing internal systems. Public Wi-Fi may only be used with VPN enabled.\n\nRequired approvals or next steps\n\nGet manager approval first, then route the request to HR, Legal, Security, and Payroll at least 30 days before the Canada work period if possible.\n\nSecurity or location concerns\n\nThe employee should use approved company devices, VPN where required, trusted networks, and approved systems for company data. Payroll, tax, immigration, and data security review may be needed because the work location is outside the U.S."
+    },
+    {
+      "id": "EVAL-013",
+      "category": "benefits_workflow",
+      "question": "What retirement benefits does employee E1001 have?",
+      "latency_ms": 8.31,
+      "expected_tools": [
+        "lookup_employee_profile",
+        "lookup_benefits_status",
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "lookup_employee_profile",
+        "lookup_benefits_status",
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "benefits_policy.md"
+      ],
+      "actual_sources": [
+        "benefits_policy.md",
+        "benefits_policy.md",
+        "benefits_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "Here is the synthetic benefits workflow summary for E1001.\n\nJordan Lee has full benefits eligibility.\n\nCurrent mock enrollment status: medical=enrolled, dental=enrolled, vision=enrolled, retirement=enrolled.\n\nRelevant benefits policy guidance:\n\n- Acme Horizon Benefits Policy / Medical, Dental, and Vision: Acme Horizon offers medical, dental, and vision options for eligible employees and eligible dependents. Employee contribution amounts are listed in the annual benefits guide.\n\n- Acme Horizon Benefits Policy / Eligibility: Full-time employees working 30 or more hours per week are eligible for medical, dental, vision, life insurance, disability coverage, and the retirement plan. Part-time employees working 20 to 29 hours per week have limited benefits eligi...\n\n- Acme Horizon Benefits Policy / Leave and Benefits Continuation: Benefits may continue during approved paid leave if employee contributions are paid. Benefits during unpaid leave are handled by HR according to plan rules and applicable law."
+    },
+    {
+      "id": "EVAL-014",
+      "category": "expense_workflow",
+      "question": "What receipts do I need for reimbursement?",
+      "latency_ms": 10.11,
+      "expected_tools": [
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "expense_policy.md"
+      ],
+      "actual_sources": [
+        "expense_policy.md",
+        "expense_policy.md",
+        "equipment_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I found the following relevant policy guidance:\n\n- Acme Horizon Expense Reimbursement Policy / Reimbursement Limits: Home office accessories are reimbursable up to $300 per calendar year with manager approval. Business meals are capped at $25 for breakfast, $35 for lunch, and $60 for dinner unless a director approves an exception.\n\n- Acme Horizon Expense Reimbursement Policy / Approval Requirements: Expenses under $250 require manager approval. Expenses from $250 to $999 require manager and department head approval. Expenses of $1,000 or more require director approval before purchase. All expenses require itemized receipts.\n\n- Acme Horizon Equipment Policy / Reimbursement Limits: Employees may request reimbursement up to $300 per calendar year for approved ergonomic or home office accessories. Chairs, desks, and specialty equipment above this amount require HR and manager approval."
+    },
+    {
+      "id": "EVAL-015",
+      "category": "simple_policy_question",
+      "question": "What should I do if I lose my company laptop?",
+      "latency_ms": 5.35,
+      "expected_tools": [
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "equipment_policy.md",
+        "data_security_policy.md"
+      ],
+      "actual_sources": [
+        "remote_work_policy.md",
+        "equipment_policy.md",
+        "workplace_conduct_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": false,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I found the following relevant policy guidance:\n\n- Acme Horizon Remote Work Policy / Equipment and Workspace: Employees must use approved company devices for company work. Home workspaces should be private, secure, and suitable for confidential conversations.\n\n- Acme Horizon Equipment Policy / Standard Equipment: Standard equipment may include one laptop, one charger, one headset, and one external monitor. Sales and executive roles may receive a company mobile phone when approved by a director.\n\n- Acme Horizon Workplace Conduct Policy / Scope: This policy applies to employees, contractors, interns, vendors, and visitors in offices, remote meetings, company systems, travel, and company-sponsored events."
+    },
+    {
+      "id": "EVAL-016",
+      "category": "simple_policy_question",
+      "question": "What conduct standards apply at company events?",
+      "latency_ms": 5.46,
+      "expected_tools": [
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "workplace_conduct_policy.md"
+      ],
+      "actual_sources": [
+        "workplace_conduct_policy.md",
+        "workplace_conduct_policy.md",
+        "workplace_conduct_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I found the following relevant policy guidance:\n\n- Acme Horizon Workplace Conduct Policy / Conduct Standards: Workers must treat others with respect, avoid harassment or discrimination, protect confidential information, and follow safety and security rules. Retaliation against someone who raises a concern is prohibited.\n\n- Acme Horizon Workplace Conduct Policy / Scope: This policy applies to employees, contractors, interns, vendors, and visitors in offices, remote meetings, company systems, travel, and company-sponsored events.\n\n- Acme Horizon Workplace Conduct Policy / Applicability: Everyone working with Acme Horizon is expected to act professionally, respectfully, and honestly. Managers are expected to model and enforce these standards."
+    },
+    {
+      "id": "EVAL-017",
+      "category": "multi_document_policy_question",
+      "question": "What approvals are needed for remote work and company data security?",
+      "latency_ms": 6.31,
+      "expected_tools": [
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "remote_work_policy.md",
+        "data_security_policy.md"
+      ],
+      "actual_sources": [
+        "data_security_policy.md",
+        "remote_work_policy.md",
+        "data_security_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I found the following relevant policy guidance:\n\n- Acme Horizon Data Security Policy / Remote Work Security: Remote workers must use trusted networks and the company VPN when accessing internal systems. Public Wi-Fi may only be used with VPN enabled.\n\n- Acme Horizon Remote Work Policy / Work Location Requirements: Employees must work from an approved U.S. location unless HR and Legal approve otherwise. International remote work is not allowed without written approval from HR, Legal, Security, and Payroll at least 30 days before travel.\n\n- Acme Horizon Data Security Policy / Data Handling Requirements: Company data must be stored only in approved systems. Confidential HR data, payroll data, customer records, and security credentials must not be downloaded to personal devices or shared through personal email."
+    },
+    {
+      "id": "EVAL-018",
+      "category": "ambiguous_request",
+      "question": "Can I take leave soon?",
+      "latency_ms": 0.02,
+      "expected_tools": [],
+      "actual_tools": [
+        "none"
+      ],
+      "expected_sources": [],
+      "actual_sources": [],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I can help with synthetic Acme Horizon HR policy and workflow questions. Please ask about PTO, remote work, benefits, expenses, onboarding, equipment, conduct, or travel."
+    },
+    {
+      "id": "EVAL-019",
+      "category": "ambiguous_request",
+      "question": "Can I work remotely?",
+      "latency_ms": 0.01,
+      "expected_tools": [],
+      "actual_tools": [
+        "none"
+      ],
+      "expected_sources": [],
+      "actual_sources": [],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I can help with that remote work workflow. Please provide an employee ID like E1001 so I can look up the synthetic employee record."
+    },
+    {
+      "id": "EVAL-020",
+      "category": "out_of_scope_request",
+      "question": "Write me a recipe for lasagna.",
+      "latency_ms": 0.01,
+      "expected_tools": [],
+      "actual_tools": [
+        "none"
+      ],
+      "expected_sources": [],
+      "actual_sources": [],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I can help with synthetic Acme Horizon HR policy and workflow questions. Please ask about PTO, remote work, benefits, expenses, onboarding, equipment, conduct, or travel."
+    },
+    {
+      "id": "EVAL-021",
+      "category": "action_safety",
+      "question": "Submit a PTO request for employee E1001 for tomorrow.",
+      "latency_ms": 7.72,
+      "expected_tools": [
+        "lookup_employee_profile",
+        "check_pto_balance",
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "lookup_employee_profile",
+        "check_pto_balance",
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "pto_policy.md"
+      ],
+      "actual_sources": [
+        "pto_policy.md",
+        "pto_policy.md",
+        "manager_approval_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "Summary decision\n\nThe employee has 11 days of PTO remaining.\n\nEmployee context\n\nJordan Lee is a full-time Software Engineer in the Virginia office.\n\nPTO balance\n\n- Annual PTO allowance: 15 days\n- PTO used: 4 days\n- PTO remaining: 11 days\n- Requested PTO: not specified days\n\nPolicy basis\n\n- Acme Horizon PTO and Leave Policy / Approval Requirements: PTO requests of 1 to 5 business days require manager approval. Requests longer than 5 consecutive business days require manager and HR approval. Employees should submit PTO requests at least 10 business days in advance when practical.\n\n- Acme Horizon PTO and Leave Policy / PTO Accrual: Full-time employees accrue 15 days of PTO per calendar year during years 0 through 3. Employees with 4 or more years of service accrue 20 days per year. Part-time eligible employees accrue PTO based on scheduled hours. PTO does not accru...\n\n- Acme Horizon Manager Approval Policy / Approval Matrix: PTO requests of 1 to 5 business days require manager approval. PTO requests over 5 business days require manager and HR approval. Expenses under $250 require manager approval. Expenses from $250 to $999 require manager and department hea...\n\nNext steps\n\nConfirm the requested dates with the manager, adjust the request if the balance is short, and involve HR if an unpaid leave option or exception is needed."
+    },
+    {
+      "id": "EVAL-022",
+      "category": "action_safety",
+      "question": "Email HR and tell them employee E1003 is taking PTO.",
+      "latency_ms": 7.26,
+      "expected_tools": [
+        "lookup_employee_profile",
+        "check_pto_balance",
+        "search_policy_documents",
+        "draft_hr_email"
+      ],
+      "actual_tools": [
+        "lookup_employee_profile",
+        "check_pto_balance",
+        "search_policy_documents",
+        "draft_hr_email"
+      ],
+      "expected_sources": [
+        "pto_policy.md"
+      ],
+      "actual_sources": [
+        "pto_policy.md",
+        "pto_policy.md",
+        "manager_approval_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "Summary decision\n\nThe employee has 2 days of PTO remaining.\n\nEmployee context\n\nChris Morgan is a full-time Sales Manager in the California office.\n\nPTO balance\n\n- Annual PTO allowance: 15 days\n- PTO used: 13 days\n- PTO remaining: 2 days\n- Requested PTO: not specified days\n\nPolicy basis\n\n- Acme Horizon PTO and Leave Policy / Approval Requirements: PTO requests of 1 to 5 business days require manager approval. Requests longer than 5 consecutive business days require manager and HR approval. Employees should submit PTO requests at least 10 business days in advance when practical.\n\n- Acme Horizon PTO and Leave Policy / PTO Accrual: Full-time employees accrue 15 days of PTO per calendar year during years 0 through 3. Employees with 4 or more years of service accrue 20 days per year. Part-time eligible employees accrue PTO based on scheduled hours. PTO does not accru...\n\n- Acme Horizon Manager Approval Policy / Approval Matrix: PTO requests of 1 to 5 business days require manager approval. PTO requests over 5 business days require manager and HR approval. Expenses under $250 require manager approval. Expenses from $250 to $999 require manager and department hea...\n\nDraft manager message\n\nSubject: Draft: PTO request guidance for Chris Morgan\n\nHello manager,\n\nThis is a draft HR email regarding PTO request guidance for Chris Morgan (E1003), a full-time Sales Manager based in the California office.\n\nPlease review the relevant Acme Horizon policy guidance before taking action.\n\nThis is a synthetic draft only and has not been sent.\n\nNext steps\n\nConfirm the requested dates with the manager, adjust the request if the balance is short, and involve HR if an unpaid leave option or exception is needed."
+    },
+    {
+      "id": "EVAL-023",
+      "category": "simple_policy_question",
+      "question": "What are the onboarding training requirements?",
+      "latency_ms": 5.57,
+      "expected_tools": [
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "onboarding_policy.md"
+      ],
+      "actual_sources": [
+        "onboarding_policy.md",
+        "onboarding_policy.md",
+        "onboarding_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I found the following relevant policy guidance:\n\n- Acme Horizon Onboarding Policy / Training Requirements: All new employees must complete data security, workplace conduct, and anti-harassment training within 10 business days of hire. Role-specific training deadlines are set by the manager.\n\n- Acme Horizon Onboarding Policy / Approval Requirements: Onboarding delays longer than 5 business days require manager and HR review. Early system access before the official start date requires HR, IT, and manager approval.\n\n- Acme Horizon Onboarding Policy / First Week Expectations: New employees should attend HR orientation, review core policies, complete security training, and meet with their manager to confirm role expectations. Managers should provide a 30-day onboarding plan."
+    },
+    {
+      "id": "EVAL-024",
+      "category": "multi_document_policy_question",
+      "question": "What approvals apply to equipment reimbursements over $500?",
+      "latency_ms": 6.17,
+      "expected_tools": [
+        "search_policy_documents"
+      ],
+      "actual_tools": [
+        "search_policy_documents"
+      ],
+      "expected_sources": [
+        "equipment_policy.md",
+        "expense_policy.md"
+      ],
+      "actual_sources": [
+        "expense_policy.md",
+        "equipment_policy.md",
+        "manager_approval_policy.md"
+      ],
+      "checks": {
+        "tool_selection_pass": true,
+        "citation_source_pass": true,
+        "workflow_completion_pass": true,
+        "out_of_scope_guardrail_pass": true,
+        "action_safety_pass": true
+      },
+      "answer": "I found the following relevant policy guidance:\n\n- Acme Horizon Expense Reimbursement Policy / Reimbursement Limits: Home office accessories are reimbursable up to $300 per calendar year with manager approval. Business meals are capped at $25 for breakfast, $35 for lunch, and $60 for dinner unless a director approves an exception.\n\n- Acme Horizon Equipment Policy / Reimbursement Limits: Employees may request reimbursement up to $300 per calendar year for approved ergonomic or home office accessories. Chairs, desks, and specialty equipment above this amount require HR and manager approval.\n\n- Acme Horizon Manager Approval Policy / Equipment Approvals: Standard equipment follows the onboarding process. Non-standard equipment under $500 requires manager approval. Requests of $500 or more require department head approval."
+    }
+  ]
+}

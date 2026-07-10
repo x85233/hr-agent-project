@@ -1,0 +1,56 @@
+[
+  {
+    "employee_id": "E1001",
+    "eligibility_status": "full eligible",
+    "enrollment_status": "enrolled",
+    "medical": "enrolled",
+    "dental": "enrolled",
+    "vision": "enrolled",
+    "retirement_plan": "enrolled"
+  },
+  {
+    "employee_id": "E1002",
+    "eligibility_status": "limited eligible",
+    "enrollment_status": "partially enrolled",
+    "medical": "not eligible",
+    "dental": "enrolled",
+    "vision": "waived",
+    "retirement_plan": "enrolled"
+  },
+  {
+    "employee_id": "E1003",
+    "eligibility_status": "full eligible",
+    "enrollment_status": "enrolled",
+    "medical": "enrolled",
+    "dental": "enrolled",
+    "vision": "enrolled",
+    "retirement_plan": "enrolled"
+  },
+  {
+    "employee_id": "E1004",
+    "eligibility_status": "not eligible",
+    "enrollment_status": "not enrolled",
+    "medical": "not eligible",
+    "dental": "not eligible",
+    "vision": "not eligible",
+    "retirement_plan": "not eligible"
+  },
+  {
+    "employee_id": "E2001",
+    "eligibility_status": "full eligible",
+    "enrollment_status": "enrolled",
+    "medical": "enrolled",
+    "dental": "enrolled",
+    "vision": "waived",
+    "retirement_plan": "enrolled"
+  },
+  {
+    "employee_id": "E2002",
+    "eligibility_status": "full eligible",
+    "enrollment_status": "enrolled",
+    "medical": "enrolled",
+    "dental": "enrolled",
+    "vision": "enrolled",
+    "retirement_plan": "enrolled"
+  }
+]

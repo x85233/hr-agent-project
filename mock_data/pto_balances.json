@@ -1,0 +1,62 @@
+[
+  {
+    "employee_id": "E1001",
+    "annual_pto_allowance_days": 15,
+    "used_pto_days": 4,
+    "remaining_pto_days": 11,
+    "sick_leave_balance_days": 6,
+    "pending_pto_requests": [
+      {
+        "request_id": "PTO-9001",
+        "dates": ["2026-08-17", "2026-08-18"],
+        "status": "pending_manager_approval"
+      }
+    ]
+  },
+  {
+    "employee_id": "E1002",
+    "annual_pto_allowance_days": 8,
+    "used_pto_days": 2,
+    "remaining_pto_days": 6,
+    "sick_leave_balance_days": 3,
+    "pending_pto_requests": []
+  },
+  {
+    "employee_id": "E1003",
+    "annual_pto_allowance_days": 15,
+    "used_pto_days": 13,
+    "remaining_pto_days": 2,
+    "sick_leave_balance_days": 1,
+    "pending_pto_requests": [
+      {
+        "request_id": "PTO-9002",
+        "dates": ["2026-07-23"],
+        "status": "pending_hr_review"
+      }
+    ]
+  },
+  {
+    "employee_id": "E1004",
+    "annual_pto_allowance_days": 0,
+    "used_pto_days": 0,
+    "remaining_pto_days": 0,
+    "sick_leave_balance_days": 0,
+    "pending_pto_requests": []
+  },
+  {
+    "employee_id": "E2001",
+    "annual_pto_allowance_days": 20,
+    "used_pto_days": 5,
+    "remaining_pto_days": 15,
+    "sick_leave_balance_days": 7,
+    "pending_pto_requests": []
+  },
+  {
+    "employee_id": "E2002",
+    "annual_pto_allowance_days": 20,
+    "used_pto_days": 8,
+    "remaining_pto_days": 12,
+    "sick_leave_balance_days": 4,
+    "pending_pto_requests": []
+  }
+]

@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HR Policy Assistant</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #1f2933;
+        background: #f6f8fb;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 32px 20px;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: 32px;
+      }
+
+      p {
+        line-height: 1.5;
+      }
+
+      #answer {
+        line-height: 1.5;
+      }
+
+      #answer h3 {
+        font-size: 18px;
+        margin: 22px 0 8px;
+      }
+
+      #answer h3:first-child {
+        margin-top: 0;
+      }
+
+      #answer p {
+        margin: 0 0 12px;
+      }
+
+      #answer ul {
+        margin: 0 0 14px 22px;
+        padding: 0;
+      }
+
+      #answer li {
+        margin-bottom: 8px;
+      }
+
+      .citation {
+        border-top: 1px solid #eef2f6;
+        padding: 12px 0;
+      }
+
+      .citation:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .citation p {
+        margin: 6px 0;
+      }
+
+      .citation small {
+        color: #627d98;
+        display: block;
+      }
+
+      form,
+      .response {
+        background: #ffffff;
+        border: 1px solid #d9e2ec;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 10px 24px rgba(31, 41, 51, 0.06);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+
+      textarea,
+      input {
+        box-sizing: border-box;
+        width: 100%;
+        border: 1px solid #bcccdc;
+        border-radius: 6px;
+        padding: 12px;
+        font: inherit;
+      }
+
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .field {
+        margin-bottom: 16px;
+      }
+
+      button {
+        border: 0;
+        border-radius: 6px;
+        background: #1267a3;
+        color: #ffffff;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 700;
+        padding: 12px 18px;
+      }
+
+      button:disabled {
+        cursor: wait;
+        opacity: 0.7;
+      }
+
+      .response {
+        display: none;
+        margin-top: 20px;
+      }
+
+      .response.visible {
+        display: block;
+      }
+
+      .section {
+        border-top: 1px solid #d9e2ec;
+        margin-top: 16px;
+        padding-top: 16px;
+      }
+
+      pre {
+        overflow-x: auto;
+        background: #102a43;
+        border-radius: 6px;
+        color: #f0f4f8;
+        padding: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>HR Policy Assistant</h1>
+      <p>Ask a sample HR policy question and see the mock answer shape.</p>
+
+      <form id="chat-form">
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required>What is the PTO policy?</textarea>
+        </div>
+
+        <div class="field">
+          <label for="employee-id">Employee ID</label>
+          <input id="employee-id" name="employee-id" placeholder="Optional" />
+        </div>
+
+        <button id="send-button" type="submit">Send</button>
+      </form>
+
+      <section id="response" class="response" aria-live="polite">
+        <h2>Answer</h2>
+        <div id="answer"></div>
+
+        <div class="section">
+          <h2>Citations</h2>
+          <div id="citations"></div>
+        </div>
+
+        <div class="section">
+          <h2>Tool Trace</h2>
+          <pre id="tool-trace"></pre>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const form = document.querySelector("#chat-form");
+      const sendButton = document.querySelector("#send-button");
+      const responsePanel = document.querySelector("#response");
+      const answerEl = document.querySelector("#answer");
+      const citationsEl = document.querySelector("#citations");
+      const toolTraceEl = document.querySelector("#tool-trace");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        sendButton.disabled = true;
+        sendButton.textContent = "Sending...";
+
+        const message = document.querySelector("#message").value;
+        const employeeId = document.querySelector("#employee-id").value;
+
+        try {
+          const response = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              message,
+              employee_id: employeeId || null,
+            }),
+          });
+
+          const data = await response.json();
+
+          answerEl.innerHTML = renderAnswer(data.answer);
+          citationsEl.innerHTML = data.citations
+            .map(
+              (citation) => `
+                <article class="citation">
+                  <strong>${citation.title}</strong>
+                  <p>${citation.section}: ${citation.snippet}</p>
+                  <small>${citation.source || ""}</small>
+                </article>
+              `
+            )
+            .join("");
+          toolTraceEl.textContent = JSON.stringify(data.tool_trace, null, 2);
+          responsePanel.classList.add("visible");
+        } catch (error) {
+          answerEl.textContent = "Something went wrong while sending the message.";
+          citationsEl.innerHTML = "";
+          toolTraceEl.textContent = String(error);
+          responsePanel.classList.add("visible");
+        } finally {
+          sendButton.disabled = false;
+          sendButton.textContent = "Send";
+        }
+      });
+
+      function renderAnswer(answer) {
+        const sectionHeadings = new Set([
+          "Summary decision",
+          "Employee context",
+          "PTO balance",
+          "Policy basis",
+          "Draft manager message",
+          "Required approvals or next steps",
+          "Security or location concerns",
+          "Next steps",
+        ]);
+
+        const lines = answer.split(/\r?\n/);
+        const html = [];
+        let listItems = [];
+        let paragraph = [];
+
+        const flushList = () => {
+          if (listItems.length > 0) {
+            html.push(`<ul>${listItems.map((item) => `<li>${item}</li>`).join("")}</ul>`);
+            listItems = [];
+          }
+        };
+
+        const flushParagraph = () => {
+          if (paragraph.length > 0) {
+            html.push(`<p>${paragraph.join(" ")}</p>`);
+            paragraph = [];
+          }
+        };
+
+        for (const rawLine of lines) {
+          const line = rawLine.trim();
+
+          if (!line) {
+            flushParagraph();
+            flushList();
+            continue;
+          }
+
+          if (sectionHeadings.has(line)) {
+            flushParagraph();
+            flushList();
+            html.push(`<h3>${escapeHtml(line)}</h3>`);
+            continue;
+          }
+
+          if (line.startsWith("- ")) {
+            flushParagraph();
+            listItems.push(escapeHtml(line.slice(2)));
+            continue;
+          }
+
+          flushList();
+          paragraph.push(escapeHtml(line));
+        }
+
+        flushParagraph();
+        flushList();
+        return html.join("");
+      }
+
+      function escapeHtml(value) {
+        return value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+    </script>
+  </body>
+</html>
