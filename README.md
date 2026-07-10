@@ -186,6 +186,45 @@ Health check:
 http://127.0.0.1:8000/health
 ```
 
+## Deployment
+
+This project is prepared for deployment to Render as a single Python web service.
+
+Run locally:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Deploy on Render:
+
+1. Create a new Render web service from the repository.
+2. Use the Python runtime.
+3. Use the build and start commands below.
+4. After deployment, open the app URL and check `/health`.
+
+Build command:
+
+```bash
+pip install -r requirements.txt
+```
+
+Start command:
+
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port $PORT
+```
+
+Health endpoint:
+
+```text
+https://your-render-app-url/health
+```
+
+Environment variables: none are required for the current synthetic demo. Render provides `PORT` automatically.
+
+Render free-tier note: services may spin down after inactivity, so the first request after inactivity may be slower.
+
 ## Run Tests
 
 ```bash
